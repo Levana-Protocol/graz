@@ -1,9 +1,9 @@
+import type { Window as KeplrWindow } from "@keplr-wallet/types";
+import type { BaseProvider, MetaMaskInpageProvider } from "@metamask/providers";
 import type Station from "@terra-money/station-connector";
+import type { VectisWindow } from "@vectis/extension-client";
 
 import type { InitiaWallet } from "../src/actions/wallet/initia";
-
-type KeplrWindow = import("@keplr-wallet/types").Window;
-type VectisWindow = import("@vectis/extension-client").VectisWindow;
 
 declare global {
   interface Window extends KeplrWindow, VectisWindow {
@@ -18,8 +18,8 @@ declare global {
         keplr: KeplrWindow["keplr"];
       };
     };
-    ethereum?: import("@metamask/providers").MetaMaskInpageProvider;
-    okxwallet?: import("@metamask/providers").BaseProvider & {
+    ethereum?: MetaMaskInpageProvider;
+    okxwallet?: BaseProvider & {
       keplr: KeplrWindow["keplr"];
     };
     station?: Station;

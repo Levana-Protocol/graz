@@ -287,7 +287,9 @@ export const getWalletConnect = (params?: GetWalletConnectParams): Wallet => {
         await approving(signal);
       } catch (error) {
         web3Modal.closeModal();
-        if (!(error as Error).message.toLowerCase().includes("no matching key")) return Promise.reject(error);
+        if (error instanceof Error && !error.message.toLowerCase().includes("no matching key")) {
+          return Promise.reject(error);
+        }
       }
       if (!params) {
         web3Modal.closeModal();

@@ -7,6 +7,7 @@ import type {
   Key,
   StdSignDoc,
 } from "@keplr-wallet/types";
+import type { MetaMaskInpageProvider } from "@metamask/providers";
 // eslint-disable-next-line import/no-named-as-default
 import Long from "long";
 
@@ -40,7 +41,7 @@ const metamaskSnapLeapKeysMap: KnownKeys = {};
  *
  */
 export const getMetamaskSnap = (params?: GetMetamaskSnap): Wallet => {
-  const ethereum = window.ethereum;
+  const ethereum = window.ethereum as MetaMaskInpageProvider | undefined;
 
   if (ethereum && params) {
     const getSnaps = async (): Promise<GetSnapsResponse> => {
