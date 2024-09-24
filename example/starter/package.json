@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "export:docs": "next build && next export --outdir ../../docs/build/examples/starter",
     "dev": "next dev -p 8080",
     "build": "next build",
     "start": "next start",
@@ -15,7 +14,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@graz-sh/types": "^0.0.4",
-    "@leapwallet/cosmos-social-login-capsule-provider-ui": "^0.0.50",
+    "@leapwallet/cosmos-social-login-capsule-provider-ui": "0.0.50",
     "bignumber.js": "^9.1.2",
     "framer-motion": "^10.16.4",
     "graz": "*",
@@ -24,7 +23,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@graz-sh/style-guide": "^4.0.1",
+    "@graz-sh/style-guide": "4.0.1",
     "@types/node": "^18.17.15",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",

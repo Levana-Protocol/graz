@@ -130,7 +130,7 @@ export const getMetamaskSnap = (params?: GetMetamaskSnap): Wallet => {
         signature: signature.signature,
         signed: {
           ...signature.signed,
-          accountNumber: `${modifiedAccountNumber.toString()}`,
+          accountNumber: modifiedAccountNumber.toString(),
           authInfoBytes: new Uint8Array(Object.values(signature.signed.authInfoBytes)),
           bodyBytes: new Uint8Array(Object.values(signature.signed.bodyBytes)),
         },
@@ -158,8 +158,7 @@ export const getMetamaskSnap = (params?: GetMetamaskSnap): Wallet => {
 
     // getKey from @leapwallet/cosmos-snap-provider return type is wrong
     const getKey = async (chainId: string): Promise<Key> => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      if (typeof metamaskSnapLeapKeysMap[chainId] !== "undefined") return metamaskSnapLeapKeysMap[chainId]!;
+      if (typeof metamaskSnapLeapKeysMap[chainId] !== "undefined") return metamaskSnapLeapKeysMap[chainId];
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const res: any = await ethereum.request({

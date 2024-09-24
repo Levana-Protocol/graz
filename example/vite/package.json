@@ -5,7 +5,6 @@
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
-    "export:docs": "tsc && vite build --emptyOutDir --outDir ../../docs/build/examples/vite",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -14,7 +13,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@graz-sh/style-guide": "^4.0.1",
+    "@graz-sh/style-guide": "4.0.1",
     "@types/node": "^18.17.15",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",

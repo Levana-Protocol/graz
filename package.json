@@ -2,32 +2,35 @@
   "name": "@graz-sh/graz",
   "version": "0.0.0",
   "workspaces": [
-    "docs",
     "example/*",
     "packages/*"
   ],
   "scripts": {
     "build": "turbo run build --filter=!@project/example-next --filter=!@project/starter --filter=!@project/example-vite",
     "clean": "turbo run clean",
-    "dev": "turbo run dev --filter=!@project/docs",
-    "project:docs": "pnpm --dir docs",
-    "example:next": "pnpm --dir example/next",
-    "example:vite": "pnpm --dir example/vite",
-    "example:starter": "pnpm --dir example/starter",
-    "graz": "pnpm --dir packages/graz",
+    "dev": "turbo run dev",
+    "example:next": "yarn workspace @project/example-next",
+    "example:vite": "yarn workspace @project/example-vite",
+    "example:starter": "yarn workspace @project/starter",
+    "graz": "yarn workspace graz",
     "lint": "turbo run lint",
-    "release": "turbo run build --filter=graz && pnpm publish --filter graz",
     "test": "turbo run test"
   },
   "devDependencies": {
-    "@graz-sh/style-guide": "^4.0.1",
-    "eslint": "^8.49.0",
+    "@graz-sh/style-guide": "4.0.1",
+    "eslint": "8.49.0",
     "p-map": "^6.0.0",
-    "prettier": "^3.0.3",
+    "prettier": "3.0.3",
     "tsup": "^7.2.0",
-    "turbo": "^1.10.13",
+    "turbo": "2.1.2",
     "typescript": "^5.2.2"
   },
+  "resolutions": {
+    "@leapwallet/buffer-boba": "0.1.6",
+    "@walletconnect/types": "2.10.0",
+    "@walletconnect/utils": "2.10.0"
+  },
+  "packageManager": "yarn@4.4.1",
   "prettier": "@graz-sh/style-guide/prettier",
   "private": true,
   "license": "MIT"

@@ -3,7 +3,6 @@ name: lint check
 on:
   push:
     paths:
-      - docs/**
       - example/**
       - packages/**
 
@@ -12,14 +11,14 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-      - uses: actions/setup-node@v3
-        with:
-          cache: pnpm
-          node-version-file: ".nvmrc"
+      - uses: actions/checkout@v4
+      # - uses: pnpm/action-setup@v2
+      #   with:
+      #     version: 8
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     cache: yarn
+      #     node-version-file: ".nvmrc"
       - run: |
-          pnpm install
-          pnpm lint
+          yarn install
+          yarn lint

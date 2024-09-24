@@ -53,7 +53,7 @@ export function useStargateSigningClient(
  *
  * ```
  */
-// eslint-disable-next-line prefer-arrow-functions/prefer-arrow-functions
+
 export function useStargateSigningClient(
   args?: BaseSigningClientArgs & Args<SigningStargateClientOptions>,
 ): UseQueryResult<SigningStargateClient | null | Record<string, SigningStargateClient | null>> {
@@ -131,7 +131,7 @@ export function useCosmWasmSigningClient(
  * await signingClients["cosmoshub-4"].getAccount("address")
  * ```
  */
-// eslint-disable-next-line prefer-arrow-functions/prefer-arrow-functions
+
 export function useCosmWasmSigningClient(
   args?: BaseSigningClientArgs & Args<SigningStargateClientOptions>,
 ): UseQueryResult<SigningCosmWasmClient | null | Record<string, SigningCosmWasmClient | null>> {
@@ -217,7 +217,7 @@ export function useStargateTmSigningClient(
  *
  * ```
  */
-// eslint-disable-next-line prefer-arrow-functions/prefer-arrow-functions
+
 export function useStargateTmSigningClient(
   args: {
     type: "tm34" | "tm37";
@@ -313,7 +313,7 @@ export function useCosmWasmTmSigningClient(
  *
  * ```
  */
-// eslint-disable-next-line prefer-arrow-functions/prefer-arrow-functions
+
 export function useCosmWasmTmSigningClient(
   args: {
     type: "tm34" | "tm37";

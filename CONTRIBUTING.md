@@ -41,8 +41,8 @@ The following steps will get you up and running to contribute to `graz`:
    cd graz
    ```
 
-3. Setup all the dependencies and packages by running `pnpm`. This command will install dependencies and bootstrap the repo.
-   > We are using `pnpm` as the default package manager, we suggest to you to do the same.
+3. Setup all the dependencies and packages by running `yarn`. This command will install dependencies and bootstrap the repo.
+   > We are using `yarn` as the default package manager, we suggest to you to do the same.
 
 ## Directory structure
 
@@ -51,7 +51,6 @@ The following steps will get you up and running to contribute to `graz`:
 ```sh
 ├── packages/             # local packages
 │   └── graz/             # graz
-├── docs/                 # documentation website
 └── example/*             # example website (nextjs + chakra ui)
 ```
 
@@ -71,13 +70,12 @@ The following steps will get you up and running to contribute to `graz`:
 
 ## Development
 
-- `pnpm graz install`: install `graz` project
-- `pnpm graz build`: build `graz` package
-- `pnpm install`: install all projects
-- `pnpm dev`: compiles `graz` and start the development server of the example app
-- `pnpm graz cli -g`: compiles `graz` chains, needed for running examples
-- `pnpm project:docs dev`: start the documentation website
-- `pnpm example dev`: start the example app
+- `yarn graz install`: install `graz` project
+- `yarn graz build`: build `graz` package
+- `yarn install`: install all projects
+- `yarn dev`: compiles `graz` and start the development server of the example app
+- `yarn graz cli -g`: compiles `graz` chains, needed for running examples
+- `yarn example dev`: start the example app
 
 ## Pull Request
 
@@ -92,7 +90,6 @@ When you create a commit we kindly ask you to follow the convention of category 
 - `feat / feature`: all changes that introduce completely new code or new features
 - `fix`: changes that fix a bug (reference the relevant issue(s) if possible)
 - `refactor`: any code-related change that is not a fix nor a feature
-- `docs`: changing existing or creating new documentation (i.e. README, docs for usage of a lib or cli usage)
 - `build`: all changes regarding the build of the software, updates to dependencies, or the addition of new dependencies
 - `test`: all changes regarding tests (adding new tests or changing existing ones)
 - `ci`: all changes regarding the configuration of continuous integration (i.e. github actions, ci system)
