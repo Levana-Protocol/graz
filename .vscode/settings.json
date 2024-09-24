@@ -11,11 +11,16 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
+  "eslint.enable": true,
+  "eslint.run": "onSave",
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.workingDirectories": [
     { "!cwd": false, "pattern": "example/*" },
     { "!cwd": false, "pattern": "packages/*" }
   ],
   "npm.packageManager": "yarn",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
