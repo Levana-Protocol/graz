@@ -4175,29 +4175,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:4.35.0":
-  version: 4.35.0
-  resolution: "@tanstack/query-core@npm:4.35.0"
-  checksum: 10/652a552fc3a73c47352bb832f6abb9915b961cda08ee87d74e6e6df94527cf79d7f86b5bf3fd4c718a94f1bcaf4b575a63339b99d69f9f3bcf2e82ac55e3eeb0
+"@tanstack/query-core@npm:5.56.2":
+  version: 5.56.2
+  resolution: "@tanstack/query-core@npm:5.56.2"
+  checksum: 10/b7600ee71c46c756edbfb0b7733c3df10c16d57b639bf6bd43b81cbdfd7678e01b425b02bd7a08764a2610af10a27f48a4380e3504a29356781bed1d50a38341
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:4.35.0":
-  version: 4.35.0
-  resolution: "@tanstack/react-query@npm:4.35.0"
+"@tanstack/react-query@npm:5.56.2":
+  version: 5.56.2
+  resolution: "@tanstack/react-query@npm:5.56.2"
   dependencies:
-    "@tanstack/query-core": "npm:4.35.0"
-    use-sync-external-store: "npm:^1.2.0"
+    "@tanstack/query-core": "npm:5.56.2"
   peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-native: "*"
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-    react-native:
-      optional: true
-  checksum: 10/2eae4fdd8f2adcbdb0b7e1d7a7dde307982b2d873b119bbc81905454d6c20a8b2561bd4afd4583afd2cb4e4ebfab30889e8ba5ef027aa58870b362da0a447341
+    react: ^18 || ^19
+  checksum: 10/fddf62e987b4f11a31fa136c5ddc203fdec642e7c35c94e5bd1132eb94c51e7d0d8eeb26f2fec9aa330929e596a4b1e340f539be26435b8858868d12d6b1578a
   languageName: node
   linkType: hard
 
@@ -8189,7 +8181,7 @@ __metadata:
     "@keplr-wallet/types": "npm:0.12.23"
     "@leapwallet/cosmos-social-login-capsule-provider": "npm:0.0.39"
     "@metamask/providers": "npm:12.0.0"
-    "@tanstack/react-query": "npm:4.35.0"
+    "@tanstack/react-query": "npm:5.56.2"
     "@terra-money/station-connector": "npm:1.1.0"
     "@types/node": "npm:^18.17.15"
     "@types/react": "npm:^18.2.21"
