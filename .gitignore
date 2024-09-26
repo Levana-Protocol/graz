@@ -12,3 +12,8 @@ tsconfig.tsbuildinfo
 # allowed directories/files
 !.gitkeep
 !.env.example
+
+/chains/*
+#/dist/**/*
+!/chains/*.stub
+!/dist/**/.gitkeep
