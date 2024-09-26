@@ -1,6 +1,6 @@
 {
   "name": "@graz-sh/graz",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "workspaces": [
     "example/*",
     "packages/*"
@@ -37,6 +37,6 @@
   },
   "packageManager": "yarn@4.4.1",
   "prettier": "@graz-sh/style-guide/prettier",
-  "private": true,
+  "private": false,
   "license": "MIT"
 }
