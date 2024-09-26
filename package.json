@@ -1,6 +1,6 @@
 {
   "name": "@graz-sh/graz",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "workspaces": [
     "example/*",
     "packages/*"
@@ -30,13 +30,14 @@
     "@walletconnect/types": "2.10.0",
     "@walletconnect/utils": "2.10.0"
   },
-  "exports": {
-    ".": {
-      "default": "./b.ts"
-    }
-  },
+  "files": [
+    "packages/**/*",
+    "example/**/*",
+    "one/a.ts",
+    "b.ts"
+  ],
   "packageManager": "yarn@4.4.1",
   "prettier": "@graz-sh/style-guide/prettier",
-  "private": false,
+  "private": true,
   "license": "MIT"
 }
