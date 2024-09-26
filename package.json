@@ -30,32 +30,6 @@
     "@walletconnect/types": "2.10.0",
     "@walletconnect/utils": "2.10.0"
   },
-  "main": "./packages/graz/dist/index.js",
-  "module": "./packages/graz/dist/index.mjs",
-  "types": "./packages/graz/dist/index.d.ts",
-  "bin": "./packages/graz/dist/cli.js",
-  "exports": {
-    ".": {
-      "types": "./packages/graz/dist/index.d.ts",
-      "import": {
-        "types": "./packages/graz/dist/index.d.mts",
-        "default": "./packages/graz/dist/index.mjs"
-      },
-      "module": "./packages/graz/dist/index.mjs",
-      "default": "./packages/graz/dist/index.js"
-    },
-    "./chains": {
-      "types": "./packages/graz/chains/index.ts",
-      "module": "./packages/graz/chains/index.mjs",
-      "default": "./packages/graz/chains/index.js"
-    }
-  },
-  "files": [
-    "packages/graz/chains/*.stub",
-    "packages/graz/dist/*",
-    "packages/graz/types/*",
-    "packages/graz/env.d.ts"
-  ],
   "packageManager": "yarn@4.4.1",
   "prettier": "@graz-sh/style-guide/prettier",
   "private": true,
