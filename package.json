@@ -54,8 +54,8 @@
   "dependencies": {
     "@cosmsnap/snapper": "0.1.29",
     "@dao-dao/cosmiframe": "0.1.0",
-    "@keplr-wallet/cosmos": "0.12.20",
-    "@keplr-wallet/types": "0.12.23",
+    "@keplr-wallet/cosmos": "0.12.129",
+    "@keplr-wallet/types": "0.12.129",
     "@metamask/providers": "12.0.0",
     "@tanstack/react-query": "5.56.2",
     "@terra-money/station-connector": "1.1.0",
@@ -82,9 +82,9 @@
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "arg": "^5.0.2",
-    "eslint": "8.49.0",
+    "eslint": "9.11.1",
     "p-map": "^6.0.0",
-    "prettier": "3.0.3",
+    "prettier": "3.3.3",
     "react": "^18.2.0",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"

@@ -7,6 +7,7 @@ import Long from "long";
 import { useGrazInternalStore } from "../../store";
 import type { SignAminoParams, SignDirectParams, Wallet } from "../../types/wallet";
 import { clearSession } from ".";
+import { ChainInfo } from "@vectis/extension-client";
 
 /**
  * Function to return {@link Wallet} object and throws and error if it does not exist on `window`.
@@ -35,13 +36,17 @@ export const getVectis = (): Wallet => {
         window.removeEventListener("vectis_accountChanged", listener);
       };
     };
-    const getOfflineSignerOnlyAmino = (...args: Parameters<Wallet["getOfflineSignerOnlyAmino"]>) => {
-      return vectis.getOfflineSignerAmino(...args);
+    const getOfflineSignerOnlyAmino = ([chainId]: Parameters<Wallet["getOfflineSignerOnlyAmino"]>) => {
+      return vectis.getOfflineSignerAmino(chainId);
     };
 
     const experimentalSuggestChain = async (...args: Parameters<Wallet["experimentalSuggestChain"]>) => {
       const [chainInfo] = args;
-      const adaptChainInfo = {
+      chainInfo.stakeCurrency
+      if (!chainInfo.bech32Config) {
+        throw new Error("Chain is missing bech32 config")
+      }
+      const adaptChainInfo: ChainInfo = {
         ...chainInfo,
         rpcUrl: chainInfo.rpc,
         restUrl: chainInfo.rest,

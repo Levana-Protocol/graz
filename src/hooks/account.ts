@@ -158,6 +158,9 @@ export const useBalances = <TMulti extends MultiChainHookArgs>(
         if (!stargateClient) {
           throw new Error(`Client is not ready ${_chain.chainId}`);
         }
+        if (!_chain.bech32Config) {
+          throw new Error("Chain is missing bech32 config")
+        }
         const balances = await stargateClient.getAllBalances(
           toBech32(_chain.bech32Config.bech32PrefixAccAddr, fromBech32(_address).data),
         );
@@ -422,7 +425,12 @@ export const useBalanceStaked = <TMulti extends MultiChainHookArgs>(
         throw new Error("address is not defined");
       }
       const res = await createMultiChainAsyncFunction(Boolean(args?.multiChain), _chains, async (_chain) => {
-        if (!_client) throw new Error("Client is not ready");
+        if (!_client) {
+          throw new Error("Client is not ready");
+        }
+        if (!_chain.bech32Config) {
+          throw new Error("Chain is missing bech32 config");
+        }
         const balance = await _client[_chain.chainId]?.getBalanceStaked(
           toBech32(_chain.bech32Config.bech32PrefixAccAddr, fromBech32(_address).data),
         );
