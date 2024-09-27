@@ -54,7 +54,22 @@ export const getMetamaskSnapCosmos = (): Wallet => {
       enable,
       getOfflineSigner: (chainId: string) => cosmos.getOfflineSigner(chainId),
       experimentalSuggestChain: async (chainInfo) => {
-        await cosmos.experimentalSuggestChain(chainInfo);
+        if (!chainInfo.stakeCurrency) {
+          throw new Error("Chain info is missing stakeCurrency");
+        }
+        if (!chainInfo.bech32Config) {
+          throw new Error("Chain is missing bech32 config");
+        }
+        await cosmos.experimentalSuggestChain({
+          ...chainInfo,
+          stakeCurrency: chainInfo.stakeCurrency,
+          bech32Config: chainInfo.bech32Config,
+          nodeProvider: {
+            ...chainInfo.nodeProvider,
+            name: chainInfo.nodeProvider?.name ?? "",
+            email: chainInfo.nodeProvider?.email ?? "",
+          },
+        });
       },
       signAmino: async (chainId, signer, signDoc) => {
         return cosmos.signAmino(chainId, signer, signDoc);

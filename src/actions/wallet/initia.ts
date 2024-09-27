@@ -10,11 +10,11 @@ import {
 import type { OfflineDirectSigner } from "@cosmjs/proto-signing";
 import type { DeliverTxResponse } from "@cosmjs/stargate";
 import type { Chain } from "@initia/initia-registry-types";
-import type { ChainInfo } from "@keplr-wallet/types";
+import type { ChainInfo, Key } from "@keplr-wallet/types";
 
 import { useGrazInternalStore } from "../../store";
 import type { SignAminoParams, SignDirectParams, Wallet } from "../../types/wallet";
-import { clearSession } from ".";
+import { clearSession, getEthereumHexAddress } from ".";
 
 export interface InitiaWallet {
   getVersion: () => Promise<string>;
@@ -56,7 +56,7 @@ export const getInitia = (): Wallet => {
       await initia.getAddress();
     };
 
-    const getKey = async (chainId: string) => {
+    const getKey = async (chainId: string): Promise<Key> => {
       const offlineSigner = initia.getOfflineSigner(chainId);
       const [account] = await offlineSigner.getAccounts();
       if (!account) {
@@ -79,6 +79,7 @@ export const getInitia = (): Wallet => {
         algo: account.algo,
         pubKey: account.pubkey,
         bech32Address: account.address,
+        ethereumHexAddress: await getEthereumHexAddress(account.pubkey),
         address: rawAddress,
         isNanoLedger: false,
         isKeystone: false,

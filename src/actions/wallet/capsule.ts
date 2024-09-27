@@ -7,6 +7,7 @@ import { RECONNECT_SESSION_KEY } from "../../constant";
 import { useGrazInternalStore, useGrazSessionStore } from "../../store";
 import type { SignAminoParams, SignDirectParams, Wallet } from "../../types/wallet";
 import { WalletType } from "../../types/wallet";
+import { getEthereumHexAddress } from ".";
 
 export const getCapsule = (): Wallet => {
   if (!useGrazInternalStore.getState().capsuleConfig?.apiKey || !useGrazInternalStore.getState().capsuleConfig?.env) {
@@ -49,6 +50,7 @@ export const getCapsule = (): Wallet => {
             {
               address: fromBech32(account.address).data,
               bech32Address: account.address,
+              ethereumHexAddress: await getEthereumHexAddress(account.pubkey),
               algo: account.algo,
               name: account.username || "",
               pubKey: account.pubkey,
@@ -86,7 +88,7 @@ export const getCapsule = (): Wallet => {
 
     useGrazInternalStore.setState({ capsuleState: null });
   };
-  const getKey = async (chainId: string) => {
+  const getKey = async (chainId: string): Promise<Key> => {
     const client = useGrazSessionStore.getState().capsuleClient;
     if (!client) throw new Error("Capsule client is not initialized");
     const key = await client.getAccount(chainId);
@@ -94,6 +96,7 @@ export const getCapsule = (): Wallet => {
     return {
       address: fromBech32(key.address).data,
       bech32Address: key.address,
+      ethereumHexAddress: await getEthereumHexAddress(key.pubkey),
       algo: key.algo,
       name: key.username || "",
       pubKey: key.pubkey,

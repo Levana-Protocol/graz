@@ -3,7 +3,7 @@ import type { ChainInfoResponse } from "@terra-money/station-connector/keplrConn
 
 import { useGrazInternalStore } from "../../store";
 import type { Wallet } from "../../types/wallet";
-import { clearSession } from ".";
+import { clearSession, getEthereumHexAddress } from ".";
 
 /**
  * Function to return Station object (which is {@link Wallet}) and throws and error if it does not exist on `window`.
@@ -36,6 +36,7 @@ export const getStation = (): Wallet => {
       const key = await station.getKey(chainId);
       return {
         isKeystone: false,
+        ethereumHexAddress: await getEthereumHexAddress(key.pubKey),
         ...key,
       };
     };
@@ -60,7 +61,14 @@ export const getStation = (): Wallet => {
 
     const experimentalSuggestChain = async (chainInfo: ChainInfo) => {
       try {
+        if (!chainInfo.stakeCurrency) {
+          throw new Error("Chain info is missing stakeCurrency");
+        }
+        if (!chainInfo.bech32Config) {
+          throw new Error("Chain info is missing stakeCurrency");
+        }
         const chainInfoResponse: ChainInfoResponse = Object.assign(chainInfo, {
+          bech32Config: chainInfo.bech32Config,
           chainSymbolImageUrl: chainInfo.chainSymbolImageUrl || "",
           stakeCurrency: {
             coinDecimals: chainInfo.stakeCurrency.coinDecimals,

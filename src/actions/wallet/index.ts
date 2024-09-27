@@ -1,3 +1,6 @@
+import { keccak256 } from "js-sha3";
+import crypto from "crypto";
+
 import { RECONNECT_SESSION_KEY } from "../../constant";
 import { grazSessionDefaultValues, useGrazInternalStore, useGrazSessionStore } from "../../store";
 import type { Wallet } from "../../types/wallet";
@@ -137,4 +140,35 @@ export const isWalletConnect = (type: WalletType): boolean => {
     type === WalletType.WC_LEAP_MOBILE ||
     type === WalletType.WC_COSMOSTATION_MOBILE
   );
+};
+
+/**
+ * Function to get the Ethereum-style address from UInt8Array pubkey
+ */
+export const getEthereumHexAddress = async (pubkeyUint8Array: Uint8Array) => {
+  const pubkeyBuffer = Buffer.from(pubkeyUint8Array);
+  const pubkeyHash = keccak256(pubkeyBuffer);
+  const ethereumAddress = `0x${pubkeyHash.slice(-40)}`;
+  return toChecksumAddress(ethereumAddress);
+};
+
+/**
+ * Function to apply EIP-55 checksum to an Ethereum address
+ */
+const toChecksumAddress = (address: string) => {
+  const addressHash = crypto.createHash("sha3-256").update(address.slice(2).toLowerCase()).digest("hex");
+
+  let checksumAddress = "0x";
+  for (let i = 0; i < address.slice(2).length; i++) {
+    const addressHashIndex = addressHash.at(i);
+    const addressIndex = addressHash.at(i + 2);
+
+    if (addressHashIndex === undefined || addressIndex === undefined) {
+      return address;
+    }
+
+    checksumAddress += parseInt(addressHashIndex, 16) > 7 ? addressIndex.toUpperCase() : addressIndex.toLowerCase();
+  }
+
+  return checksumAddress;
 };

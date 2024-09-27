@@ -1,4 +1,4 @@
-import type { AminoSignResponse } from "@cosmjs/amino";
+import { decodeBech32Pubkey, type AminoSignResponse } from "@cosmjs/amino";
 import { fromBech32 } from "@cosmjs/encoding";
 import type { DirectSignResponse } from "@cosmjs/proto-signing";
 import type { Key } from "@keplr-wallet/types";
@@ -6,8 +6,7 @@ import Long from "long";
 
 import { useGrazInternalStore } from "../../store";
 import type { SignAminoParams, SignDirectParams, Wallet } from "../../types/wallet";
-import { clearSession } from ".";
-import { ChainInfo } from "@vectis/extension-client";
+import { clearSession, getEthereumHexAddress } from ".";
 
 /**
  * Function to return {@link Wallet} object and throws and error if it does not exist on `window`.
@@ -36,22 +35,27 @@ export const getVectis = (): Wallet => {
         window.removeEventListener("vectis_accountChanged", listener);
       };
     };
-    const getOfflineSignerOnlyAmino = ([chainId]: Parameters<Wallet["getOfflineSignerOnlyAmino"]>) => {
+    const getOfflineSignerOnlyAmino = (...args: Parameters<Wallet["getOfflineSignerOnlyAmino"]>) => {
+      const [chainId] = args;
       return vectis.getOfflineSignerAmino(chainId);
     };
 
     const experimentalSuggestChain = async (...args: Parameters<Wallet["experimentalSuggestChain"]>) => {
       const [chainInfo] = args;
-      chainInfo.stakeCurrency
+      const { stakeCurrency } = chainInfo;
       if (!chainInfo.bech32Config) {
-        throw new Error("Chain is missing bech32 config")
+        throw new Error("Chain is missing bech32 config");
       }
-      const adaptChainInfo: ChainInfo = {
+      if (!stakeCurrency) {
+        throw new Error("Chain info is missing stakeCurrency");
+      }
+      const adaptChainInfo = {
         ...chainInfo,
         rpcUrl: chainInfo.rpc,
         restUrl: chainInfo.rest,
         prettyName: chainInfo.chainName.replace(" ", ""),
         bech32Prefix: chainInfo.bech32Config.bech32PrefixAccAddr,
+        stakeCurrency,
       };
       return vectis.suggestChains([adaptChainInfo]);
     };
@@ -62,6 +66,7 @@ export const getVectis = (): Wallet => {
         address: fromBech32(key.address).data,
         algo: key.algo,
         bech32Address: key.address,
+        ethereumHexAddress: await getEthereumHexAddress(key.pubKey),
         name: key.name,
         pubKey: key.pubKey,
         isKeystone: false,
