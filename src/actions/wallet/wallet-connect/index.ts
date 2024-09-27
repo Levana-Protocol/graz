@@ -254,7 +254,7 @@ export const getWalletConnect = (params?: GetWalletConnectParams): Wallet => {
                 resAcc[x] = {
                   ...acc,
                   bech32Address: toBech32(
-                    chains!.find((y) => y.chainId === x)!.bech32Config.bech32PrefixAccAddr,
+                    chains!.find((y) => y.chainId === x)!.bech32Config!.bech32PrefixAccAddr,
                     fromBech32(_acc[0]!.bech32Address).data,
                   ),
                 };

@@ -4,6 +4,7 @@ import type { MetaMaskInpageProvider } from "@metamask/providers";
 import { useGrazInternalStore } from "../../../store";
 import type { KnownKeys, Wallet } from "../../../types/wallet";
 import type { ChainId } from "../../../utils/multi-chain";
+import { getEthereumHexAddress } from "..";
 
 const metamaskSnapCosmosKeysMap: KnownKeys = {};
 
@@ -77,7 +78,12 @@ export const getMetamaskSnapCosmos = (): Wallet => {
       getKey: async (chainId) => {
         if (typeof metamaskSnapCosmosKeysMap[chainId] !== "undefined") return metamaskSnapCosmosKeysMap[chainId];
 
-        return cosmos.getKey(chainId);
+        const account = await cosmos.getKey(chainId);
+
+        return {
+          ethereumHexAddress: await getEthereumHexAddress(account.pubKey),
+          ...account,
+        };
       },
       getOfflineSignerAuto,
       getOfflineSignerOnlyAmino: (chainId) => {
