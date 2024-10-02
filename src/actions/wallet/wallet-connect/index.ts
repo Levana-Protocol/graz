@@ -12,6 +12,7 @@ import { type SignAminoParams, type SignDirectParams, type Wallet, WalletType } 
 import { isAndroid, isIos, isMobile } from "../../../utils/os";
 import { promiseWithTimeout } from "../../../utils/timeout";
 import type { GetWalletConnectParams, WalletConnectSignDirectResponse } from "./types";
+import { getEthereumHexAddress } from "..";
 
 export const getWalletConnect = (params?: GetWalletConnectParams): Wallet => {
   if (!useGrazInternalStore.getState().walletConnect?.options?.projectId?.trim()) {
@@ -250,13 +251,16 @@ export const getWalletConnect = (params?: GetWalletConnectParams): Wallet => {
               const acc = _acc[0];
               if (!acc) return reject(new Error("No accounts"));
               const resAcc: Record<string, Key> = {};
-              chainId.forEach((x) => {
-                resAcc[x] = {
-                  ...acc,
-                  bech32Address: toBech32(
-                    chains!.find((y) => y.chainId === x)!.bech32Config!.bech32PrefixAccAddr,
-                    fromBech32(_acc[0]!.bech32Address).data,
-                  ),
+              _acc.forEach(async (x) => {
+                resAcc[x.chainId!] = {
+                  address: x.address,
+                  algo: x.algo as Algo,
+                  bech32Address: x.bech32Address,
+                  ethereumHexAddress: await getEthereumHexAddress(x.pubKey),
+                  isNanoLedger: x.isNanoLedger,
+                  isKeystone: x.isKeystone,
+                  name: x.name,
+                  pubKey: x.pubKey,
                 };
               });
 

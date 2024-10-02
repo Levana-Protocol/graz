@@ -9,6 +9,7 @@ import { getCosmiframe } from "../actions/wallet/cosmiframe";
 import { getCosmostation } from "../actions/wallet/cosmostation";
 import { getKeplr } from "../actions/wallet/keplr";
 import { getLeap } from "../actions/wallet/leap";
+import { getOkx } from "../actions/wallet/okx";
 import { getStation } from "../actions/wallet/station";
 import { getVectis } from "../actions/wallet/vectis";
 import { getWalletConnect } from "../actions/wallet/wallet-connect";
@@ -124,6 +125,11 @@ export const useGrazEvents = () => {
           void reconnect({ onError: _onReconnectFailed });
         });
       }
+    }
+    if (_reconnectConnector === WalletType.OKX) {
+      getOkx().subscription?.(() => {
+        void reconnect({ onError: _onReconnectFailed });
+      });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
