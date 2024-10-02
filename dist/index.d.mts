@@ -35,7 +35,8 @@ declare enum WalletType {
     CAPSULE = "capsule",
     COSMIFRAME = "cosmiframe",
     COMPASS = "compass",
-    INITIA = "initia"
+    INITIA = "initia",
+    OKX = "okx"
 }
 declare const WALLET_TYPES: WalletType[];
 type Wallet = Pick<Keplr, "enable" | "getKey" | "getOfflineSigner" | "getOfflineSignerAuto" | "getOfflineSignerOnlyAmino" | "experimentalSuggestChain" | "signDirect" | "signAmino"> & {
