@@ -1,8 +1,8 @@
-import type { KeplrIntereactionOptions, Key } from "@keplr-wallet/types";
+import type { KeplrIntereactionOptions } from "@keplr-wallet/types";
 
 import { useGrazInternalStore } from "../../store";
 import type { Wallet } from "../../types/wallet";
-import { clearSession, getEthereumHexAddress } from ".";
+import { clearSession } from ".";
 
 /**
  * Function to return Leap object (which is {@link Wallet}) and throws and error if it does not exist on `window`.
@@ -34,17 +34,9 @@ export const getLeap = (): Wallet => {
     const setDefaultOptions = (options: KeplrIntereactionOptions) => {
       leap.defaultOptions = options;
     };
-    const getKey = async (chainId: string): Promise<Key> => {
-      const key = await leap.getKey(chainId);
-      return {
-        ...key,
-        ethereumHexAddress: key.ethereumHexAddress ?? getEthereumHexAddress(key.pubKey),
-      };
-    };
     const res = Object.assign(leap, {
       subscription,
       setDefaultOptions,
-      getKey,
     });
     return res;
   }
