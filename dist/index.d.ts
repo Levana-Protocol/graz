@@ -1,15 +1,18 @@
 /// <reference types="../types/global" />
 import { OfflineDirectSigner, Coin } from '@cosmjs/proto-signing';
 import { Keplr, KeplrIntereactionOptions, Key, ChainInfo, OfflineAminoSigner, AppCurrency } from '@keplr-wallet/types';
-import { SignClientTypes } from '@walletconnect/types';
+import * as zustand from 'zustand';
+import * as _leapwallet_cosmos_social_login_capsule_provider from '@leapwallet/cosmos-social-login-capsule-provider';
+import { CapsuleProvider } from '@leapwallet/cosmos-social-login-capsule-provider';
+import { ISignClient, SignClientTypes } from '@walletconnect/types';
 import { Web3ModalConfig } from '@web3modal/standalone';
+import { PersistOptions } from 'zustand/middleware';
 import * as _cosmjs_cosmwasm_stargate from '@cosmjs/cosmwasm-stargate';
 import { SigningCosmWasmClient, InstantiateOptions, CosmWasmClient, InstantiateResult, ExecuteResult, SigningCosmWasmClientOptions } from '@cosmjs/cosmwasm-stargate';
 import { SigningStargateClient, StdFee, DeliverTxResponse, QueryClient, StakingExtension, StargateClient, SigningStargateClientOptions } from '@cosmjs/stargate';
 import { Height } from 'cosmjs-types/ibc/core/client/v1/client';
 import * as _tanstack_react_query from '@tanstack/react-query';
 import { UseQueryResult, QueryClientProviderProps } from '@tanstack/react-query';
-import * as _leapwallet_cosmos_social_login_capsule_provider from '@leapwallet/cosmos-social-login-capsule-provider';
 import { BondStatusString } from '@cosmjs/stargate/build/modules/staking/queries';
 import { QueryValidatorsResponse } from 'cosmjs-types/cosmos/staking/v1beta1/query';
 import { Tendermint34Client, Tendermint37Client } from '@cosmjs/tendermint-rpc';
@@ -162,6 +165,33 @@ interface GrazInternalStore {
     _reconnectConnector: WalletType | null;
     _onReconnectFailed: () => void;
 }
+interface GrazSessionStore {
+    accounts: Record<string, Key> | null;
+    activeChainIds: string[] | null;
+    status: "connected" | "connecting" | "reconnecting" | "disconnected";
+    wcSignClients: Map<WalletType, ISignClient>;
+    capsuleClient: CapsuleProvider | null;
+}
+type GrazSessionPersistedStore = Pick<GrazSessionStore, "accounts" | "activeChainIds">;
+declare const useGrazSessionStore: zustand.UseBoundStore<Omit<Omit<zustand.StoreApi<GrazSessionStore>, "subscribe"> & {
+    subscribe: {
+        (listener: (selectedState: GrazSessionStore, previousSelectedState: GrazSessionStore) => void): () => void;
+        <U>(selector: (state: GrazSessionStore) => U, listener: (selectedState: U, previousSelectedState: U) => void, options?: {
+            equalityFn?: ((a: U, b: U) => boolean) | undefined;
+            fireImmediately?: boolean;
+        } | undefined): () => void;
+    };
+}, "persist"> & {
+    persist: {
+        setOptions: (options: Partial<PersistOptions<GrazSessionStore, GrazSessionPersistedStore>>) => void;
+        clearStorage: () => void;
+        rehydrate: () => Promise<void> | void;
+        hasHydrated: () => boolean;
+        onHydrate: (fn: (state: GrazSessionStore) => void) => () => void;
+        onFinishHydration: (fn: (state: GrazSessionStore) => void) => () => void;
+        getOptions: () => Partial<PersistOptions<GrazSessionStore, GrazSessionPersistedStore>>;
+    };
+}>;
 
 interface ConfigureGrazArgs {
     defaultWallet?: WalletType;
@@ -1141,4 +1171,4 @@ declare const useGrazEvents: () => null;
  */
 declare const GrazEvents: FC;
 
-export { ConfigureGrazArgs, ConnectArgs, ConnectResult, Dictionary, ExecuteContractArgs, ExecuteContractMutationArgs, GrazEvents, GrazProvider, GrazProviderProps, InstantiateContractArgs, InstantiateContractMutationArgs, KnownKeys, Maybe, OfflineSigners, ReconnectArgs, SendIbcTokensArgs, SendTokensArgs, SignAminoParams, SignDirectParams, SuggestChainAndConnectArgs, SuggestChainArgs, UseAccountArgs, UseAccountResult, UseConnectChainArgs, UseExecuteContractArgs, UseInstantiateContractArgs, UseSuggestChainAndConnectArgs, UseSuggestChainArgs, WALLET_TYPES, Wallet, WalletType, checkWallet, clearRecentChain, clearSession, configureGraz, connect, defineChainInfo, defineChains, disconnect, executeContract, getAccounts, getAvailableWallets, getChainInfo, getChainInfos, getCosmostation, getEthereumHexAddress, getKeplr, getLeap, getMetamaskSnapLeap, getOfflineSigners, getQueryRaw, getQuerySmart, getRecentChainIds, getRecentChains, getVectis, getWCCosmostation, getWCKeplr, getWCLeap, getWallet, getWalletConnect, getWalletType, instantiateContract, isCapsule, isWalletConnect, reconnect, sendIbcTokens, sendTokens, subscribeAccounts, suggestChain, suggestChainAndConnect, useAccount, useActiveChainCurrency, useActiveChainIds, useActiveChains, useActiveWalletType, useBalance, useBalanceStaked, useBalances, useCapsule, useChainInfo, useChainInfos, useCheckWallet, useConnect, useCosmWasmClient, useCosmWasmSigningClient, useCosmWasmTmSigningClient, useDisconnect, useExecuteContract, useGrazEvents, useInstantiateContract, useOfflineSigners, useQueryClientValidators, useQueryRaw, useQuerySmart, useRecentChainIds, useRecentChains, useSendIbcTokens, useSendTokens, useStargateClient, useStargateSigningClient, useStargateTmSigningClient, useSuggestChain, useSuggestChainAndConnect, useTendermintClient };
+export { ConfigureGrazArgs, ConnectArgs, ConnectResult, Dictionary, ExecuteContractArgs, ExecuteContractMutationArgs, GrazEvents, GrazProvider, GrazProviderProps, InstantiateContractArgs, InstantiateContractMutationArgs, KnownKeys, Maybe, OfflineSigners, ReconnectArgs, SendIbcTokensArgs, SendTokensArgs, SignAminoParams, SignDirectParams, SuggestChainAndConnectArgs, SuggestChainArgs, UseAccountArgs, UseAccountResult, UseConnectChainArgs, UseExecuteContractArgs, UseInstantiateContractArgs, UseSuggestChainAndConnectArgs, UseSuggestChainArgs, WALLET_TYPES, Wallet, WalletType, checkWallet, clearRecentChain, clearSession, configureGraz, connect, defineChainInfo, defineChains, disconnect, executeContract, getAccounts, getAvailableWallets, getChainInfo, getChainInfos, getCosmostation, getEthereumHexAddress, getKeplr, getLeap, getMetamaskSnapLeap, getOfflineSigners, getQueryRaw, getQuerySmart, getRecentChainIds, getRecentChains, getVectis, getWCCosmostation, getWCKeplr, getWCLeap, getWallet, getWalletConnect, getWalletType, instantiateContract, isCapsule, isWalletConnect, reconnect, sendIbcTokens, sendTokens, subscribeAccounts, suggestChain, suggestChainAndConnect, useAccount, useActiveChainCurrency, useActiveChainIds, useActiveChains, useActiveWalletType, useBalance, useBalanceStaked, useBalances, useCapsule, useChainInfo, useChainInfos, useCheckWallet, useConnect, useCosmWasmClient, useCosmWasmSigningClient, useCosmWasmTmSigningClient, useDisconnect, useExecuteContract, useGrazEvents, useGrazSessionStore, useInstantiateContract, useOfflineSigners, useQueryClientValidators, useQueryRaw, useQuerySmart, useRecentChainIds, useRecentChains, useSendIbcTokens, useSendTokens, useStargateClient, useStargateSigningClient, useStargateTmSigningClient, useSuggestChain, useSuggestChainAndConnect, useTendermintClient };

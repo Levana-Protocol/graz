@@ -98,6 +98,7 @@ exports.useCosmWasmTmSigningClient = zc;
 exports.useDisconnect = Ha;
 exports.useExecuteContract = xc;
 exports.useGrazEvents = zi;
+exports.useGrazSessionStore = w;
 exports.useInstantiateContract = Oc;
 exports.useOfflineSigners = Qa;
 exports.useQueryClientValidators = pc;
