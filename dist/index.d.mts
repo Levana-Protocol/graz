@@ -85,7 +85,7 @@ declare const getOfflineSigners: (args?: {
     chainId: string;
 }) => Promise<OfflineSigners>;
 declare const getAccounts: () => Record<string, Key> | null;
-declare const subscribeAccounts: (selector: (account: Record<string, Key> | null, previousAccounts: Record<string, Key> | null) => void) => () => void;
+declare const subscribeAccounts: (selector: (accounts: Record<string, Key> | null, previousAccounts: Record<string, Key> | null) => void) => () => void;
 
 declare const clearRecentChain: () => void;
 declare const getRecentChainIds: () => string[] | null;

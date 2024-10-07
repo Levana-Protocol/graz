@@ -235,7 +235,7 @@ export const getAccounts = () => {
 };
 
 export const subscribeAccounts = (
-  selector: (account: Record<string, Key> | null, previousAccounts: Record<string, Key> | null) => void,
+  selector: (accounts: Record<string, Key> | null, previousAccounts: Record<string, Key> | null) => void,
 ) => {
   return useGrazSessionStore.subscribe((state) => state.accounts, selector);
 };
