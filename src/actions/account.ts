@@ -8,6 +8,10 @@ import type { WalletType } from "../types/wallet";
 import type { ChainId } from "../utils/multi-chain";
 import { checkWallet, getWallet, isCapsule, isWalletConnect } from "./wallet";
 
+export const accounts = () => {
+  return useGrazSessionStore.getState().accounts;
+};
+
 export type ConnectArgs = Maybe<{
   chainId: ChainId;
   walletType?: WalletType;
