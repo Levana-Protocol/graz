@@ -57,7 +57,6 @@ interface MultiChainHookArgs {
     multiChain?: boolean;
 }
 
-declare const getAccounts: () => Record<string, Key> | null;
 type ConnectArgs = Maybe<{
     chainId: ChainId$1;
     walletType?: WalletType;
@@ -85,6 +84,8 @@ declare const getOfflineSigners: (args?: {
     walletType?: WalletType;
     chainId: string;
 }) => Promise<OfflineSigners>;
+declare const getAccounts: () => Record<string, Key> | null;
+declare const subscribeAccounts: (selector: (account: Record<string, Key> | null, previousAccounts: Record<string, Key> | null) => void) => () => void;
 
 declare const clearRecentChain: () => void;
 declare const getRecentChainIds: () => string[] | null;
@@ -1140,4 +1141,4 @@ declare const useGrazEvents: () => null;
  */
 declare const GrazEvents: FC;
 
-export { ConfigureGrazArgs, ConnectArgs, ConnectResult, Dictionary, ExecuteContractArgs, ExecuteContractMutationArgs, GrazEvents, GrazProvider, GrazProviderProps, InstantiateContractArgs, InstantiateContractMutationArgs, KnownKeys, Maybe, OfflineSigners, ReconnectArgs, SendIbcTokensArgs, SendTokensArgs, SignAminoParams, SignDirectParams, SuggestChainAndConnectArgs, SuggestChainArgs, UseAccountArgs, UseAccountResult, UseConnectChainArgs, UseExecuteContractArgs, UseInstantiateContractArgs, UseSuggestChainAndConnectArgs, UseSuggestChainArgs, WALLET_TYPES, Wallet, WalletType, checkWallet, clearRecentChain, clearSession, configureGraz, connect, defineChainInfo, defineChains, disconnect, executeContract, getAccounts, getAvailableWallets, getChainInfo, getChainInfos, getCosmostation, getEthereumHexAddress, getKeplr, getLeap, getMetamaskSnapLeap, getOfflineSigners, getQueryRaw, getQuerySmart, getRecentChainIds, getRecentChains, getVectis, getWCCosmostation, getWCKeplr, getWCLeap, getWallet, getWalletConnect, getWalletType, instantiateContract, isCapsule, isWalletConnect, reconnect, sendIbcTokens, sendTokens, suggestChain, suggestChainAndConnect, useAccount, useActiveChainCurrency, useActiveChainIds, useActiveChains, useActiveWalletType, useBalance, useBalanceStaked, useBalances, useCapsule, useChainInfo, useChainInfos, useCheckWallet, useConnect, useCosmWasmClient, useCosmWasmSigningClient, useCosmWasmTmSigningClient, useDisconnect, useExecuteContract, useGrazEvents, useInstantiateContract, useOfflineSigners, useQueryClientValidators, useQueryRaw, useQuerySmart, useRecentChainIds, useRecentChains, useSendIbcTokens, useSendTokens, useStargateClient, useStargateSigningClient, useStargateTmSigningClient, useSuggestChain, useSuggestChainAndConnect, useTendermintClient };
+export { ConfigureGrazArgs, ConnectArgs, ConnectResult, Dictionary, ExecuteContractArgs, ExecuteContractMutationArgs, GrazEvents, GrazProvider, GrazProviderProps, InstantiateContractArgs, InstantiateContractMutationArgs, KnownKeys, Maybe, OfflineSigners, ReconnectArgs, SendIbcTokensArgs, SendTokensArgs, SignAminoParams, SignDirectParams, SuggestChainAndConnectArgs, SuggestChainArgs, UseAccountArgs, UseAccountResult, UseConnectChainArgs, UseExecuteContractArgs, UseInstantiateContractArgs, UseSuggestChainAndConnectArgs, UseSuggestChainArgs, WALLET_TYPES, Wallet, WalletType, checkWallet, clearRecentChain, clearSession, configureGraz, connect, defineChainInfo, defineChains, disconnect, executeContract, getAccounts, getAvailableWallets, getChainInfo, getChainInfos, getCosmostation, getEthereumHexAddress, getKeplr, getLeap, getMetamaskSnapLeap, getOfflineSigners, getQueryRaw, getQuerySmart, getRecentChainIds, getRecentChains, getVectis, getWCCosmostation, getWCKeplr, getWCLeap, getWallet, getWalletConnect, getWalletType, instantiateContract, isCapsule, isWalletConnect, reconnect, sendIbcTokens, sendTokens, subscribeAccounts, suggestChain, suggestChainAndConnect, useAccount, useActiveChainCurrency, useActiveChainIds, useActiveChains, useActiveWalletType, useBalance, useBalanceStaked, useBalances, useCapsule, useChainInfo, useChainInfos, useCheckWallet, useConnect, useCosmWasmClient, useCosmWasmSigningClient, useCosmWasmTmSigningClient, useDisconnect, useExecuteContract, useGrazEvents, useInstantiateContract, useOfflineSigners, useQueryClientValidators, useQueryRaw, useQuerySmart, useRecentChainIds, useRecentChains, useSendIbcTokens, useSendTokens, useStargateClient, useStargateSigningClient, useStargateTmSigningClient, useSuggestChain, useSuggestChainAndConnect, useTendermintClient };

@@ -8,10 +8,6 @@ import type { WalletType } from "../types/wallet";
 import type { ChainId } from "../utils/multi-chain";
 import { checkWallet, getWallet, isCapsule, isWalletConnect } from "./wallet";
 
-export const getAccounts = () => {
-  return useGrazSessionStore.getState().accounts;
-};
-
 export type ConnectArgs = Maybe<{
   chainId: ChainId;
   walletType?: WalletType;
@@ -232,4 +228,14 @@ export const getOfflineSigners = async (args?: {
   const offlineSignerAuto = await wallet.getOfflineSignerAuto(args.chainId);
 
   return { offlineSigner, offlineSignerAmino, offlineSignerAuto };
+};
+
+export const getAccounts = () => {
+  return useGrazSessionStore.getState().accounts;
+};
+
+export const subscribeAccounts = (
+  selector: (account: Record<string, Key> | null, previousAccounts: Record<string, Key> | null) => void,
+) => {
+  return useGrazSessionStore.subscribe((state) => state.accounts, selector);
 };
