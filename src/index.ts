@@ -24,6 +24,3 @@ export * from "./provider";
 export * from "./provider/events";
 export * from "./types/core";
 export * from "./types/wallet";
-
-// TODO: this should not be exposed
-export { useGrazSessionStore } from "./store";
