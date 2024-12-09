@@ -23,9 +23,9 @@ declare global {
       keplr: KeplrWindow["keplr"];
     };
     station?: Station;
-    xfi?: {
-      keplr: KeplrWindow["keplr"];
-    };
+    // xfi?: {
+    //   keplr: KeplrWindow["keplr"];
+    // };
     initia?: InitiaWallet;
   }
 }
