@@ -7,7 +7,7 @@ import type { InitiaWallet } from "../src/actions/wallet/initia";
 
 declare global {
   interface Window extends KeplrWindow, VectisWindow {
-    // leap?: KeplrWindow["keplr"];
+    leap?: KeplrWindow["keplr"];
     compass?: KeplrWindow["keplr"];
     cosmostation?: {
       cosmos: {
@@ -18,14 +18,14 @@ declare global {
         keplr: KeplrWindow["keplr"];
       };
     };
-    // ethereum?: MetaMaskInpageProvider;
+    ethereum?: MetaMaskInpageProvider;
     okxwallet?: BaseProvider & {
       keplr: KeplrWindow["keplr"];
     };
-    // station?: Station;
-    // xfi?: {
-    //   keplr: KeplrWindow["keplr"];
-    // };
+    station?: Station;
+    xfi?: {
+      keplr: KeplrWindow["keplr"];
+    };
     initia?: InitiaWallet;
   }
 }
